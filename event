@@ -1,0 +1,10 @@
+package editor;
+public class Event{
+    public Node node;
+    public String eventType;
+    public Event(Node n, String et){
+        node = n;
+        eventType = et;
+
+    }
+}
