@@ -1,0 +1,52 @@
+package editor;
+
+
+public class HundStack {
+        public LinkedListDeque<Event> undoList = new LinkedListDeque<Event>();
+        public LinkedListDeque<Event> redoList = new LinkedListDeque<Event>();
+        public HundStack(LinkedListDeque<Event> u, LinkedListDeque<Event> r){
+                undoList = u;
+                redoList = r;
+        }
+        public void addToUndo(Event e){
+                undoList.addLast(e);
+
+                if(undoList.size() >= 100){
+                        undoList.removeFirst();
+
+                }
+        }
+        public void addToRedo(Event e){
+                redoList.addLast(e);
+
+                if(redoList.size() >= 100){
+                        redoList.removeFirst();
+
+                }
+        }
+        public Event undo(){
+
+                        Event e = undoList.removeLast();
+                        redoList.addLast(e);
+                        return e;
+
+
+        }
+        public Event redo(){
+
+                        Event e = redoList.removeLast();
+                        undoList.addLast(e);
+                        return e;
+
+        }
+        public void UndoSwitch(Event e){
+                if(e.eventType.equals("add")){
+                        e.eventType = "remove";
+                }
+                else{
+                        e.eventType = "add";
+                }
+        }
+
+
+}
